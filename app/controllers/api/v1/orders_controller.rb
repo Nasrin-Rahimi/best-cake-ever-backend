@@ -3,9 +3,17 @@ class Api::V1::OrdersController < ApplicationController
     before_action :set_order, only: [:update, :destroy]
 
     def index
-        customer = Customer.find(params[:user_id])
-        orders = customer.orders
-        render json: orders
+        # customer = Customer.find(params[:user_id])
+        # orders = customer.orders
+        # render json: orders
+        if logged_in?
+            orders = current_customer.orders
+            render json: orders
+        else
+            render json: {
+                error: "You must be logged in to see your orders!"
+            }
+        end
     end
 
     def create
