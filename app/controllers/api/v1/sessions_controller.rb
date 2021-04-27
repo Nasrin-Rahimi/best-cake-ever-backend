@@ -5,7 +5,10 @@ class Api::V1::SessionsController < ApplicationController
 
         if customer && customer.authenticate(params[:session][:password])
             session[:customer_id] = customer.id
-            render json: CustomerSerializer.new(customer).serialized_json
+            options = {
+                include: [:orders]
+            }
+            render json: CustomerSerializer.new(customer,options)
         else
             render json: {
                 error: "Invalid Credentials"
@@ -21,7 +24,10 @@ class Api::V1::SessionsController < ApplicationController
             # we are using fast json API, We have serializer to specific which attribute
             # we want to return, We should pass our customer to serializer to select specific attributes
             #render json: current_customer
-            render json: CustomerSerializer.new(current_customer).serialized_json
+            options = {
+                include: [:orders]
+            }
+            render json: CustomerSerializer.new(current_customer, options)
         else
             render json: {
                 error: "No one logged in"
