@@ -7,9 +7,9 @@ class Api::V1::SessionsController < ApplicationController
             session[:customer_id] = customer.id
             #we should add option to control on relational attributes we want.
             options = {
-                include: [:orders]
+                include: [:orders, :orderdetails]
             }
-            render json: CustomerSerializer.new(customer,options)
+            render json: CustomerSerializer.new(customer, options)
         else
             render json: {
                 error: "Invalid Credentials"
@@ -26,7 +26,7 @@ class Api::V1::SessionsController < ApplicationController
             # we want to return, We should pass our customer to serializer to select specific attributes
             #render json: current_customer
             options = {
-                include: [:orders]
+                include: [:orders, :orderdetails]
             }
             render json: CustomerSerializer.new(current_customer, options)
         else
