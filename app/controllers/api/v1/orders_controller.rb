@@ -8,7 +8,7 @@ class Api::V1::OrdersController < ApplicationController
         # render json: orders
         if logged_in?
             orders = current_customer.orders
-            render json: orders
+            render json: OrderSerializer.new(orders)
         else
             render json: {
                 error: "You must be logged in to see your orders!"
