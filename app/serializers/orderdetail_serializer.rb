@@ -1,4 +1,4 @@
 class OrderdetailSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :quantity
+  attributes :quantity, :order_id
 end
