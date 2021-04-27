@@ -20,3 +20,7 @@ Products = Product.create([
     {name: 'Wegmans 1 Layer Fruit Topped Shortcake', category_id: 3, unit_price: 15.00, weight: '25 ounce', description: "Moist gold cake , split, filled and decorated with fresh whipped cream. Topped with the season's best fresh strawberries Food You Feel Good About. Serves 6-8"}      
 ])
 
+# OR
+# category = Category.create(name: 'Bread, Fresh Baked')
+# category.products.create(name: 'Garlic Tuscan Bread', unit_price: 5.00, weight: '13 ounce', description: "Basted with garlic oil and sprinkled with sea salt, this Italian style bread has a crispy, eggshell crust with a super-soft, moist flavorful crumb.")
+

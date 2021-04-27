@@ -5,6 +5,7 @@ class Api::V1::SessionsController < ApplicationController
 
         if customer && customer.authenticate(params[:session][:password])
             session[:customer_id] = customer.id
+            #we should add option to control on relational attributes we want.
             options = {
                 include: [:orders]
             }
