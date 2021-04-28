@@ -14,4 +14,24 @@ class Api::V1::CustomersController < ApplicationController
         end
     end
 
+    def create
+        customer = Customer.new(customer_params)
+        if customer.save
+            session[:customer_id] = customer.id
+            customer_json = CustomerSerializer.new(customer)
+            render json: customer_json
+        else
+            resp = {
+                error: customer.errors.full_messages.to_sentence
+            }
+            render json: resp
+        end
+    end
+
+    private
+
+    def customer_params
+        params.require(:customer).permit(:name, :password)
+    end
+
 end
