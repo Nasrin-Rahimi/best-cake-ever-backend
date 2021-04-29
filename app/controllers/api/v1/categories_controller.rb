@@ -2,7 +2,11 @@ class Api::V1::CategoriesController < ApplicationController
 
     def index
         categories = Category.all
-        render json: categories
+        options = {
+                include: [:products]
+            }
+        categories_json = CategorySerializer.new(categories, options)
+        render json: categories_json
     end
 
     def show
