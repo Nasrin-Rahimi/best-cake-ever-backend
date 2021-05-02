@@ -5,7 +5,7 @@ class Api::V1::CustomersController < ApplicationController
         if(customer)
             # render json: {id: customer.id, name: customer.name, orders: customer.orders}
             options = {
-                include: [:orders]
+                include: [:orders, :orderdetails]
             }
             customer_json = CustomerSerializer.new(customer, options)
             render json: customer_json
